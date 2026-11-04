@@ -1,0 +1,154 @@
+{
+  "version": "1.0.1-demo",
+  "version_code": 101,
+  "apk_sha256": "4a75a50cebed2c31e03018a91ec8487d2c95e10f00ed2d0cfccae35ea3dbc8d2",
+  "date": "2026-11-03",
+  "build": "official Android SDK 35 direct build / JDK17",
+  "signature_and_zip_alignment": "passed; see build-signature-alignment.txt",
+  "core_checks": 36,
+  "web_native_parity_inputs": 2048,
+  "ui_checks": {
+    "normal": 89,
+    "restore": 9
+  },
+  "device": "AOSP Android9 API28 x86 emulator 35.2.10; 1280x800 160dpi; software CPU",
+  "interaction": "screen coordinate pointer down/up after full target visibility assertion; scrolling programmatic",
+  "visual_changes": [
+    "front/north diagram connection routed outside hospital name",
+    "hospital label drawn above route lines",
+    "plan start button fixed below scroll area; fully visible before scrolling assertion"
+  ],
+  "real_pleos_sdk_calls": 0,
+  "real_vehicle_validation": false,
+  "lint_for_101": "not rerun; previous lint applies only to version100",
+  "captures": [
+    {
+      "name": "01-default-bottom-device.png",
+      "sha256": "3c1ecb88ac21b320f5c7739c5bd115438d4ad5f2352bc78c194f141e92e9f661"
+    },
+    {
+      "name": "01-default-bottom.png",
+      "sha256": "777d42ae4bc2ed4971e7fd16528e857fd8123e8ed48154a93c0e0d5c5ffa4c2b"
+    },
+    {
+      "name": "01-default-top-device.png",
+      "sha256": "200f66f04fda4fc35c586e9526a55c8de180584c995643e906408e603261618b"
+    },
+    {
+      "name": "01-default-top.png",
+      "sha256": "d826fce1ebf7642839c0f1054c814f5664ea70acb2a450259c89d90ac920aebf"
+    },
+    {
+      "name": "02-conditions-bottom-device.png",
+      "sha256": "0e4be43a170dbeecefeab3a551670dbf7f67fa7f325ab246d687123336f945bd"
+    },
+    {
+      "name": "02-conditions-bottom.png",
+      "sha256": "57cea52f193e90ca76968a4c5ff7e759924ac574ab650b9b8a2061b2d51763c9"
+    },
+    {
+      "name": "02-conditions-top-device.png",
+      "sha256": "209134ceefeade6bf356b772797bb2c654baaeb7b14904e033a20abd6b50e4f1"
+    },
+    {
+      "name": "02-conditions-top.png",
+      "sha256": "cf2018433a5067bd145921e74d43b63523745146608b574d8713e2ee2ae7c2a7"
+    },
+    {
+      "name": "03-guiding-landscape-device.png",
+      "sha256": "8f2fdb490d24e8d92a9ad87bbad9cdedca1a9c96ca61de2b171cc63832d4fd33"
+    },
+    {
+      "name": "03-guiding-landscape.png",
+      "sha256": "00627b432e41a300a6608a77c9de4019517d57bbc47b77abe9efe5e9800a4e9b"
+    },
+    {
+      "name": "03-guiding-portrait-device.png",
+      "sha256": "5774764175fbcf20407ef2e0e7e02fd867ffa8bfc30189909b49591146502cf0"
+    },
+    {
+      "name": "03-guiding-portrait.png",
+      "sha256": "318f51078ff9e66467ef32a4dfbb2ab05e19441329136afeb0b0794c836b648b"
+    },
+    {
+      "name": "04-continue-parking-device.png",
+      "sha256": "79672a21f7c2c8237522428715e76eb98f61cc475b3bc5c903e36531409c96e1"
+    },
+    {
+      "name": "04-continue-parking.png",
+      "sha256": "3fed9517d07ac5c75b2f591c582cb3c2a190ba6341acedaa64eab693051f6bff"
+    },
+    {
+      "name": "05-waiting-bottom-device.png",
+      "sha256": "a0a839f74f0a2dcdd44147e46b873d832803a73ad64572fe53dbf890dc2e6aef"
+    },
+    {
+      "name": "05-waiting-bottom.png",
+      "sha256": "9b46794f7195a17ad4c166e13ea23b9add9569055aefad5ebe75771c587f27de"
+    },
+    {
+      "name": "05-waiting-portrait-device.png",
+      "sha256": "ba9e289a63496b9d1910e3ec83af7e4909e22b0aab2b86e2cb819345b5784fa0"
+    },
+    {
+      "name": "05-waiting-portrait.png",
+      "sha256": "bf74473d48ffb660046909edc83a1937c7de1c1a683d705d552f3837bdf5b671"
+    },
+    {
+      "name": "05-waiting-top-device.png",
+      "sha256": "65b43d4d9cfe375c9ff7bcbc5cdaf51e5e91c560853d51ab020477fb1889abcc"
+    },
+    {
+      "name": "05-waiting-top.png",
+      "sha256": "c96557f71d6109662897f081599da05db865ab9a7cd7035a56a2b13bedf20372"
+    },
+    {
+      "name": "06-pickup-bottom-device.png",
+      "sha256": "644ecededd423ea016837a8a00179a5e9e2619df1ace7c9bbd1a7eb1bdba0058"
+    },
+    {
+      "name": "06-pickup-bottom.png",
+      "sha256": "7f24a8b2797ab653e298f52cd14ba394f76179679df9ebef5304cd993f8e1ef1"
+    },
+    {
+      "name": "06-pickup-portrait-device.png",
+      "sha256": "c17dd69961d5ab498730a4191c1e24af23bacdf949e0b969e3c0775b639c2bc1"
+    },
+    {
+      "name": "06-pickup-portrait.png",
+      "sha256": "56ba02fab99e8be208e0cb3a6784d76d048a489578dff3d82a1185b5b2bdade4"
+    },
+    {
+      "name": "06-pickup-top-device.png",
+      "sha256": "093af83e975a5b74695f9264599487f28b477c63bc3cbcc0ce506681a94dc505"
+    },
+    {
+      "name": "06-pickup-top.png",
+      "sha256": "ed29cdfbb977a2b06f7275c874b01a4dcb38bc602c267b88b6fb7806bbbc144f"
+    },
+    {
+      "name": "07-done-bottom-device.png",
+      "sha256": "f5d69b0524beebef1e8ebeddf834c07bdfc5518a6ff2597e0f28d548d1c61413"
+    },
+    {
+      "name": "07-done-bottom.png",
+      "sha256": "e4a71e983979741d0dee25ba147867f496b10e3d5a3245f501063d7b05d9c4f9"
+    },
+    {
+      "name": "07-done-top-device.png",
+      "sha256": "5b9bfbd6c3bf066ed0adeaa01b9fb36d341b7c30c3af46a71b14667102482aa5"
+    },
+    {
+      "name": "07-done-top.png",
+      "sha256": "4a47d5d907b67a7f8a56643015be262a8f9e8d350835da37584054bd509e4ccf"
+    },
+    {
+      "name": "08-restored-device.png",
+      "sha256": "f1f1c271501c9074a0afca15c95396cbef6dcf9604e8f6a0e280b98e354d9227"
+    },
+    {
+      "name": "08-restored.png",
+      "sha256": "73166ec98e3257cb10b9c5dd6cb49bef1a221d3c10b52bcea1117cdb06f2e4b5"
+    }
+  ]
+}

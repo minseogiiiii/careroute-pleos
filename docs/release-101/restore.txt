@@ -1,0 +1,41 @@
+INSTRUMENTATION_STATUS: stream=화면: 안내 상태 확인 필요
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=화면: 모의 경로 요청  1회
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=버튼 활성 false: 저장한 단계 확인 후 재개
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=실제 포인터 입력: 모의 정차 상태 확인
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=실제 포인터 입력: 저장한 단계 확인 후 재개
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=화면: 주차장으로 안내
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=화면: 모의 경로 요청  2회
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=화면: 요청 전송됨
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=실행 Activity View 및 기기 화면 캡처: 08-restored
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: checks=9
+INSTRUMENTATION_RESULT: passed=true
+INSTRUMENTATION_RESULT: stream=PASS 1 · 화면: 안내 상태 확인 필요
+PASS 2 · 화면: 모의 경로 요청  1회
+PASS 3 · 버튼 활성 false: 저장한 단계 확인 후 재개
+PASS 4 · 실제 포인터 입력: 모의 정차 상태 확인
+PASS 5 · 실제 포인터 입력: 저장한 단계 확인 후 재개
+PASS 6 · 화면: 주차장으로 안내
+PASS 7 · 화면: 모의 경로 요청  2회
+PASS 8 · 화면: 요청 전송됨
+PASS 9 · 실행 Activity View 및 기기 화면 캡처: 08-restored
+ALL 9 UI CHECKS PASSED / restore
+
+INSTRUMENTATION_CODE: -1

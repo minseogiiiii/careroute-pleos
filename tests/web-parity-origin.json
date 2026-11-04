@@ -1,0 +1,31 @@
+{
+  "generated_from": "CareRoute judge demo engine.js",
+  "source_sha256": "132989c8e3faef7ea2f5abf209c0b87c784a7c5c61a17f715377fab2e90578bf",
+  "configurations": 2048,
+  "axes": {
+    "stepFree": [
+      false,
+      true
+    ],
+    "maxWalk": [
+      null,
+      70,
+      100,
+      180
+    ],
+    "priority": [
+      "drive",
+      "walk"
+    ],
+    "evidenceValid": [
+      false,
+      true
+    ],
+    "closures": "all 64 subsets of front,side,west,north,south,east"
+  },
+  "assertions": [
+    "best plan ID, walking distance and vehicle total",
+    "number of accepted combinations"
+  ],
+  "note": "Frozen reference generated before Android engine checks; not a user study or navigation performance benchmark."
+}

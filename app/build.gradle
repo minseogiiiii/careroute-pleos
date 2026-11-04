@@ -1,0 +1,30 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'com.careroute.firstround'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'com.careroute.firstround'
+        minSdk 28
+        targetSdk 35
+        versionCode 101
+        versionName '1.0.1-demo'
+    }
+    signingConfigs {
+        judge {
+            if (System.getenv('CAREROUTE_KEYSTORE')) {
+                storeFile file(System.getenv('CAREROUTE_KEYSTORE'))
+                storePassword System.getenv('CAREROUTE_STORE_PASSWORD')
+                keyAlias System.getenv('CAREROUTE_KEY_ALIAS') ?: 'careroute-judge'
+                keyPassword System.getenv('CAREROUTE_KEY_PASSWORD') ?: System.getenv('CAREROUTE_STORE_PASSWORD')
+            }
+        }
+    }
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled false
+            if (System.getenv('CAREROUTE_KEYSTORE')) signingConfig signingConfigs.judge
+        }
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+}

@@ -1,0 +1,22 @@
+화면: 방문 계획
+화면: 모의 경로 요청  0회
+회전 후 단계·요청 유지 2
+가로 두 열의 수평 분리 확인
+스크롤 전 시작 버튼 전체 노출
+화면: 실제 승하차 허용 미확인
+화면: 승하차 위치·허용·거리·시간은 시연 가정
+화면: 180m
+실행 Activity View 및 기기 화면 캡처: 01-default-top
+실행 Activity View 및 기기 화면 캡처: 01-default-bottom
+PASS 1 · 화면: 방문 계획
+PASS 2 · 화면: 모의 경로 요청  0회
+PASS 3 · 회전 후 단계·요청 유지 2
+PASS 4 · 가로 두 열의 수평 분리 확인
+PASS 5 · 스크롤 전 시작 버튼 전체 노출
+PASS 6 · 화면: 실제 승하차 허용 미확인
+PASS 7 · 화면: 승하차 위치·허용·거리·시간은 시연 가정
+PASS 8 · 화면: 180m
+PASS 9 · 실행 Activity View 및 기기 화면 캡처: 01-default-top
+PASS 10 · 실행 Activity View 및 기기 화면 캡처: 01-default-bottom
+FAILED: java.lang.SecurityException: Injecting to another application requires INJECT_EVENTS permission
+

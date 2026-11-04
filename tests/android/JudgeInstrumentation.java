@@ -23,12 +23,12 @@ public final class JudgeInstrumentation extends Instrumentation {
     private void guiding(){tap("모의 경로 계산 완료");contains("계산 완료 · 안내 시작 전");tap("모의 안내 시작");contains("모의 안내 중");}
     private void count(int n){contains("모의 경로 요청  "+n+"회");}
     private void normal(){
-        contains("180m");tap("대표 조건 적용 · 계단 회피 + 100m");contains("70m");contains("22분");contains("본관 측면 승하차 구역");contains("남측 주차장");contains("동측 출입구 승하차 구역");
-        tap("이 계획으로 하차·주차 안내 시작");count(1);guiding();tap("모의 도착 · 측면");contains("주차장으로 안내");count(1);
-        tap("모의 도착 · 남측 주차장");contains("주차 후 대기");count(1);tap("모의 가족 연락 수신");count(1);
-        tap("픽업 안내 시작");count(2);guiding();tap("모의 도착 · 동측 출입구");contains("픽업 위치 도착");enabled("탑승 확인 후 귀가 안내 시작",false);
+        contains("180m");tap("대표 조건 적용 · 계단 회피 + 100m");contains("70m");contains("22분");contains("B · 무단차 가정 하차");contains("2주차장 연결 가정");contains("U · 별도 가정 픽업");
+        tap("이 계획으로 하차·주차 안내 시작");count(1);guiding();tap("모의 도착 · 가정 B");contains("주차장으로 안내");count(1);
+        tap("모의 도착 · 2주차장 연결 가정");contains("주차 후 대기");count(1);tap("모의 가족 연락 수신");count(1);
+        tap("픽업 안내 시작");count(2);guiding();tap("모의 도착 · 가정 U");contains("픽업 위치 도착");enabled("탑승 확인 후 귀가 안내 시작",false);
         tap("운전자가 실제 탑승을 확인했어요");enabled("탑승 확인 후 귀가 안내 시작",true);tap("탑승 확인 후 귀가 안내 시작");count(3);guiding();tap("모의 도착 · 귀가");contains("방문 완료");count(3);
-        tap("처음부터 다시 시연");tap("대표 조건 적용 · 계단 회피 + 100m");tap("이 계획으로 하차·주차 안내 시작");guiding();tap("모의 도착 · 측면");contains("주차장으로 안내");count(1);
+        tap("처음부터 다시 시연");tap("대표 조건 적용 · 계단 회피 + 100m");tap("이 계획으로 하차·주차 안내 시작");guiding();tap("모의 도착 · 가정 B");contains("주차장으로 안내");count(1);
     }
     private void restore(){
         contains("안내 상태 확인 필요");count(1);enabled("저장한 단계 확인 후 재개",false);

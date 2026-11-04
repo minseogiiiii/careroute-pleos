@@ -10,7 +10,7 @@ public final class FacilityMapView extends View {
     private final Paint p=new Paint(3);private final JourneyEngine engine;
     private final Path line=new Path();private final DashPathEffect dash=new DashPathEffect(new float[]{12,9},0);
     public FacilityMapView(Context c){this(c,new JourneyEngine());}
-    public FacilityMapView(Context c,JourneyEngine e){super(c);engine=e;setContentDescription("가상 한빛병원 배치도. 실제 도로 지도 아님");}
+    public FacilityMapView(Context c,JourneyEngine e){super(c);engine=e;setContentDescription("승하차와 차량 연결을 가정한 배치도. 실제 시설 지도와 허용 위치 아님");}
     void text(Canvas c,String t,float x,float y,int size,int color){p.setColor(color);p.setTextSize(size);p.setTypeface(Typeface.create("sans-serif",Typeface.BOLD));p.setStyle(Paint.Style.FILL);p.setTextAlign(Paint.Align.CENTER);c.drawText(t,x,y,p);}
     @Override protected void onDraw(Canvas c){
         super.onDraw(c);float sx=getWidth()/780f,sy=getHeight()/450f;c.save();c.scale(sx,sy);
@@ -30,7 +30,7 @@ public final class FacilityMapView extends View {
             p.setPathEffect(null);p.setStyle(Paint.Style.FILL);
         }
         p.setColor(Color.rgb(44,77,82));c.drawRoundRect(287,137,482,251,16,16,p);
-        text(c,"한빛병원 본관",384,183,24,Color.rgb(225,239,224));text(c,"가상 시설 · 실제 도로 아님",384,213,15,Color.rgb(163,191,185));
+        text(c,"본관 배치 가정",384,183,24,Color.rgb(225,239,224));text(c,"승하차 허용·배치 미확인",384,213,15,Color.rgb(163,191,185));
         for(Node n:NODES.values()){
             boolean chosen=plan!=null&&(n.id.equals(plan.drop)||n.id.equals(plan.park)||n.id.equals(plan.pickup));
             p.setColor(engine.options.closed.contains(n.id)?Color.rgb(206,132,108):chosen?Color.rgb(184,230,176):Color.rgb(103,139,140));

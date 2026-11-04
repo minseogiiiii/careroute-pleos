@@ -54,12 +54,14 @@ public final class JudgeInstrumentation extends Instrumentation {
     private void guiding(){tap("모의 경로 계산 완료");contains("계산 완료 · 안내 시작 전");tap("모의 안내 시작");contains("모의 안내 중");}
     private void count(int n){contains("모의 경로 요청  "+n+"회");}
     private void normal(){
-        contains("180m");capture("01-default-top",false);capture("01-default-bottom",true);tap("대표 조건 적용 · 계단 회피 + 100m");contains("70m");contains("22분");contains("본관 측면 승하차 구역");contains("남측 주차장");contains("동측 출입구 승하차 구역");capture("02-conditions-top",false);capture("02-conditions-bottom",true);
-        tap("이 계획으로 하차·주차 안내 시작");count(1);guiding();rotationPair("하차 위치로 안내",1,"03-guiding");capture("03-guiding-landscape",false);tap("모의 도착 · 측면");contains("주차장으로 안내");count(1);capture("04-continue-parking",false);
-        tap("모의 도착 · 남측 주차장");contains("주차 후 대기");count(1);tap("모의 가족 연락 수신");count(1);rotationPair("주차 후 대기",1,"05-waiting");capture("05-waiting-top",false);capture("05-waiting-bottom",true);
-        tap("픽업 안내 시작");count(2);guiding();tap("모의 도착 · 동측 출입구");contains("픽업 위치 도착");enabled("탑승 확인 후 귀가 안내 시작",false);rotationPair("픽업 위치 도착",2,"06-pickup");capture("06-pickup-top",false);capture("06-pickup-bottom",true);
+        contains("실제 승하차 허용 미확인");contains("승하차 위치·허용·거리·시간은 시연 가정");contains("180m");capture("01-default-top",false);capture("01-default-bottom",true);tap("대표 조건 적용 · 계단 회피 + 100m");contains("70m");contains("22분");contains("B · 무단차 가정 하차");contains("2주차장 연결 가정");contains("U · 별도 가정 픽업");capture("02-conditions-top",false);capture("02-conditions-bottom",true);
+        tap("이 계획으로 하차·주차 안내 시작");count(1);guiding();rotationPair("하차 위치로 안내",1,"03-guiding");capture("03-guiding-landscape",false);tap("모의 도착 · 가정 B");contains("주차장으로 안내");count(1);capture("04-continue-parking",false);
+        tap("모의 도착 · 2주차장 연결 가정");contains("주차 후 대기");count(1);tap("모의 가족 연락 수신");count(1);rotationPair("주차 후 대기",1,"05-waiting");capture("05-waiting-top",false);capture("05-waiting-bottom",true);
+        tap("픽업 안내 시작");count(2);guiding();tap("모의 도착 · 가정 U");contains("픽업 위치 도착");enabled("탑승 확인 후 귀가 안내 시작",false);rotationPair("픽업 위치 도착",2,"06-pickup");capture("06-pickup-top",false);capture("06-pickup-bottom",true);
         tap("운전자가 실제 탑승을 확인했어요");enabled("탑승 확인 후 귀가 안내 시작",true);tap("탑승 확인 후 귀가 안내 시작");count(3);guiding();tap("모의 도착 · 귀가");contains("방문 완료");count(3);capture("07-done-top",false);capture("07-done-bottom",true);
-        tap("처음부터 다시 시연");tap("대표 조건 적용 · 계단 회피 + 100m");tap("이 계획으로 하차·주차 안내 시작");guiding();tap("모의 도착 · 측면");contains("주차장으로 안내");count(1);
+        tap("처음부터 다시 시연");tap("시연 도구");tap("가정한 허용 조건으로 시연 · 실제 허가 아님");tap("방문 시연");contains("현재 조건에 맞는 조합이 없어요.");capture("09-assumptions-off",false);
+        tap("시연 도구");tap("가정한 허용 조건으로 시연 · 실제 허가 아님");tap("방문 시연");contains("180m");
+        tap("대표 조건 적용 · 계단 회피 + 100m");tap("이 계획으로 하차·주차 안내 시작");guiding();tap("모의 도착 · 가정 B");contains("주차장으로 안내");count(1);
     }
     private void restore(){
         contains("안내 상태 확인 필요");count(1);enabled("저장한 단계 확인 후 재개",false);

@@ -7,6 +7,7 @@ cd "$(dirname "$0")/.."
 tools="$ANDROID_HOME/build-tools/35.0.0"
 platform="$ANDROID_HOME/platforms/android-35/android.jar"
 classes="app/build/intermediates/javac/release/compileReleaseJavaWithJavac/classes"
+if [ ! -d "$classes" ]; then classes="build/sdk-release/classes"; fi
 out="build/visual-test"
 mkdir -p "$out/classes" "$out/dex"
 "$tools/aapt2" link -I "$platform" --manifest tests/android/AndroidManifest.xml -o "$out/resources.apk"

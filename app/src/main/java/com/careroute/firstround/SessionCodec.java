@@ -9,11 +9,12 @@ public final class SessionCodec {
     public static String encode(JourneyEngine e) {
         try {
             ByteArrayOutputStream raw=new ByteArrayOutputStream();DataOutputStream d=new DataOutputStream(raw);
-            d.writeInt(1);d.writeUTF(e.stage.name());d.writeUTF(e.savedStage.name());
+            d.writeInt(2);d.writeUTF(e.stage.name());d.writeUTF(e.savedStage.name());
             d.writeBoolean(e.options.stepFree);d.writeBoolean(e.options.evidenceValid);d.writeBoolean(e.options.walkFirst);
             d.writeInt(e.options.maxWalk==null?-1:e.options.maxWalk);d.writeInt(e.options.closed.size());for(String c:e.options.closed)d.writeUTF(c);
             d.writeUTF(e.selected==null?"":e.selected.id);d.writeInt(e.requestCount);d.writeBoolean(e.contact);d.writeBoolean(e.sensorAvailable);
             d.writeInt(e.requests.size());for(Request r:e.requests){d.writeInt(r.number);d.writeUTF(r.api);d.writeUTF(r.destination);d.writeUTF(r.waypoint==null?"":r.waypoint);}
+            d.writeBoolean(e.options.simulatePermissions);
             d.writeInt(e.logs.size());for(String l:e.logs)d.writeUTF(l);d.flush();return Base64.getEncoder().encodeToString(raw.toByteArray());
         }catch(IOException ex){throw new IllegalStateException(ex);}
     }
@@ -22,7 +23,7 @@ public final class SessionCodec {
         try {
             if(encoded.length()>200000)return null;
             DataInputStream d=new DataInputStream(new ByteArrayInputStream(Base64.getDecoder().decode(encoded)));
-            if(d.readInt()!=1)return null;JourneyEngine e=new JourneyEngine();
+            int version=d.readInt();if(version!=2)return null;JourneyEngine e=new JourneyEngine();
             e.stage=Stage.valueOf(d.readUTF());e.savedStage=Stage.valueOf(d.readUTF());
             e.options.stepFree=d.readBoolean();e.options.evidenceValid=d.readBoolean();e.options.walkFirst=d.readBoolean();
             int max=d.readInt();if(max< -1||max>10000)return null;e.options.maxWalk=max<0?null:max;
@@ -35,6 +36,7 @@ public final class SessionCodec {
             e.requestCount=d.readInt();if(e.requestCount<0||e.requestCount>1000000)return null;e.contact=d.readBoolean();e.sensorAvailable=d.readBoolean();
             c=d.readInt();if(c<0||c>50)return null;int previous=0;
             for(int i=0;i<c;i++){int n=d.readInt();String a=d.readUTF(),dst=d.readUTF(),w=d.readUTF();if(n<=previous||n>e.requestCount||!NODES.containsKey(dst)||(!w.isEmpty()&&!NODES.containsKey(w)))return null;previous=n;e.requests.add(new Request(n,a,dst,w.isEmpty()?null:w));}
+            if(version>=2)e.options.simulatePermissions=d.readBoolean();
             c=d.readInt();if(c<0||c>120)return null;for(int i=0;i<c;i++)e.logs.add(d.readUTF());
             if(d.available()!=0)return null;
             e.restart();return e;

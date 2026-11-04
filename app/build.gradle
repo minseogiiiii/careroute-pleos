@@ -6,8 +6,8 @@ android {
         applicationId 'com.careroute.firstround'
         minSdk 28
         targetSdk 35
-        versionCode 101
-        versionName '1.0.1-demo'
+        versionCode 102
+        versionName '1.0.2-demo'
     }
     signingConfigs {
         judge {

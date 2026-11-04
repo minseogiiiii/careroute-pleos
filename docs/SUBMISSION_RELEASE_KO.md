@@ -1,3 +1,5 @@
+> 이 문서는 1.0.1의 이력입니다. 해당 APK는 `apk/archive/1.0.1/CareRoute_CareRoute_release.apk`, 현재 1.0.2 검증은 `docs/release-102/README.md`를 확인하세요.
+
 # 1차 제출용 APK · 1.0.1-demo
 
 기준일: 2026-11-03. 현재 제출용 APK는 versionCode 101입니다. 이전 100 버전의 캡처·검증은 이 기록과 구분합니다.
@@ -31,6 +33,6 @@ APK SHA-256: `4a75a50cebed2c31e03018a91ec8487d2c95e10f00ed2d0cfccae35ea3dbc8d2`
 
 1. `apk/CareRoute_CareRoute_release.apk`를 설치해 `JUDGE_START_KO.md` 순서로 실행합니다. 동일한 기존 서명키를 사용해 이전 버전 위에 업데이트할 수 있습니다.
 2. 실제 신청 명칭에 맞게 제출 APK 파일명과 기획서·영상·README 설명을 일치시킵니다.
-3. GitHub 게시와 심사자 접근 확인, 제출일 공식 규정 확인 및 접수는 아직 수행하지 않았습니다. 서명키·암호는 저장소 밖에 보관합니다.
+3. 이 기록 작성일(2026-11-03)에는 GitHub 게시·접근 확인·접수를 수행하지 않았습니다. GitHub 게시는 이후 완료했으며 이메일 접수 완료를 뜻하지 않습니다. 서명키·암호는 저장소 밖에 보관합니다.
 
 현재 배포 APK는 공식 SDK 직접 빌드본입니다. Gradle 설정과 직접 빌드 스크립트의 앱 ID·버전·SDK는 일치시켰습니다. 이전 Gradle/lint 로그는 버전100의 이력 자료입니다.

@@ -4,6 +4,12 @@ import java.util.*;
 
 /** Pure Java domain model. All locations, costs, vehicle signals and navigation are synthetic. */
 public final class JourneyEngine {
+    public static final String VERSION="1.0.2-demo";
+    public static final String FACILITY="서울대병원 환경 참고 · 가정 배치";
+    public static final String ASSUMPTION_NOTICE="승하차 위치·허용·거리·시간은 시연 가정입니다. 실제 시설 승인·경로가 아닙니다.";
+    /** Every stop in this fixture is assumed, never an externally verified permission. */
+    public static boolean permissionVerified(String id){return false;}
+
     public static final String[] DROPS={"front","side","west","taxi","unknown"};
     public static final String[] PARKS={"north","south"}, PICKUPS={"front","east"};
     public static final Map<String,Node> NODES=new LinkedHashMap<>();
@@ -11,14 +17,14 @@ public final class JourneyEngine {
     static {
         node("origin","고정 출발지","출발",0,false,"allowed",78,398);
         node("home","고정 귀가지","귀가",0,false,"allowed",700,398);
-        node("front","본관 정문 승하차 구역","정문",90,true,"allowed",380,308);
-        node("side","본관 측면 승하차 구역","측면",35,false,"allowed",215,208);
-        node("west","서측 승하차 구역","서측",55,false,"allowed",86,154);
-        node("taxi","택시 전용 구역","택시 전용",10,false,"prohibited",482,304);
-        node("unknown","허용 미확인 구역","허용 미확인",5,false,"unknown",584,330);
-        node("north","북측 주차장","북측 주차장",0,false,"allowed",378,62);
-        node("south","남측 주차장","남측 주차장",0,false,"allowed",161,354);
-        node("east","동측 출입구 승하차 구역","동측 출입구",35,false,"allowed",586,202);
+        node("front","A · 로비 앞 가정 승하차","가정 A",90,true,"allowed",380,308);
+        node("side","B · 무단차 가정 하차","가정 B",35,false,"allowed",215,208);
+        node("west","C · 대체 가정 하차","가정 C",55,false,"allowed",86,154);
+        node("taxi","전용구역 가정","전용 가정",10,false,"prohibited",482,304);
+        node("unknown","허용 미확인 가정","미확인",5,false,"unknown",584,330);
+        node("north","CMI 연결 가정","CMI 연결 가정",0,false,"allowed",378,62);
+        node("south","2주차장 연결 가정","2주차장 연결 가정",0,false,"allowed",161,354);
+        node("east","U · 별도 가정 픽업","가정 U",35,false,"allowed",586,202);
         edge("origin","front",3);edge("origin","side",4);edge("origin","west",3);edge("origin","taxi",2);edge("origin","unknown",1);
         edge("front","north",4);edge("front","south",10);edge("front","home",5);
         edge("side","north",14);edge("side","south",6);edge("west","north",11);edge("west","south",15);
@@ -36,6 +42,7 @@ public final class JourneyEngine {
     public static String shortName(String id){return NODES.containsKey(id)?NODES.get(id).shortName:id;}
     public static final class Options {
         public boolean stepFree=false,evidenceValid=true,walkFirst=false;
+        public boolean simulatePermissions=true;
         public Integer maxWalk=null;
         public final Set<String> closed=new LinkedHashSet<>();
     }
@@ -57,7 +64,8 @@ public final class JourneyEngine {
         Ranking r=new Ranking();
         for(String d:DROPS)for(String p:PARKS)for(String u:PICKUPS){
             String why=null; List<Node> ns=Arrays.asList(NODES.get(d),NODES.get(p),NODES.get(u));
-            if(!o.evidenceValid)why="필수 정보의 재확인 기한이 지남";
+            if(!o.simulatePermissions)why="실제 승하차 허용 미확인 · 가정 시연 꺼짐";
+            else if(!o.evidenceValid)why="필수 정보의 재확인 기한이 지남";
             else if(ns.stream().anyMatch(n->n.permission.equals("prohibited")))why="일반 승용차 승하차 불허";
             else if(ns.stream().anyMatch(n->!n.permission.equals("allowed")))why="이용 허용 정보 미확인";
             else if(ns.stream().anyMatch(n->o.closed.contains(n.id)))why="현재 이용 불가";
@@ -118,13 +126,14 @@ public final class JourneyEngine {
         if(selected==null)return false;Stage st=stage==Stage.RECOVERY?savedStage:stage;
         if(st==Stage.AT_PICKUP||st==Stage.HOME||st==Stage.DONE)return true;
         Plan p=selected;
+        if(!options.simulatePermissions)return false;
         if(st==Stage.TO_PARK)return options.evidenceValid&&!options.closed.contains(p.park)&&cost(p.drop,p.park)>=0;
         if(st==Stage.WAITING||st==Stage.TO_PICKUP)return pickupValid(p.pickup);
         return rank(options).accepted.stream().anyMatch(v->v.id.equals(p.id));
     }
     public boolean pickupValid(String u){
         if(selected==null||!Arrays.asList(PICKUPS).contains(u))return false;
-        Node n=NODES.get(u);return options.evidenceValid&&!options.closed.contains(selected.park)&&!options.closed.contains(u)&&n.permission.equals("allowed")&&(!options.stepFree||!n.stairs)&&(options.maxWalk==null||NODES.get(selected.drop).walk+n.walk<=options.maxWalk)&&cost(selected.park,u)>=0&&cost(u,"home")>=0;
+        Node n=NODES.get(u);return options.simulatePermissions&&options.evidenceValid&&!options.closed.contains(selected.park)&&!options.closed.contains(u)&&n.permission.equals("allowed")&&(!options.stepFree||!n.stairs)&&(options.maxWalk==null||NODES.get(selected.drop).walk+n.walk<=options.maxWalk)&&cost(selected.park,u)>=0&&cost(u,"home")>=0;
     }
     public void changePickup(String u){
         notice="";if(stage!=Stage.WAITING||!stopped())return;
@@ -149,9 +158,10 @@ public final class JourneyEngine {
         }
     }
     public String report(){
-        StringBuilder b=new StringBuilder("CareRoute 1.0.0-demo | Android native | OFFLINE SIMULATION\n실제 Pleos SDK 호출: 0 / 실제 차량·시설 검증: 미실시\n");
+        StringBuilder b=new StringBuilder("CareRoute "+VERSION+" | Android native | OFFLINE SIMULATION\n"+FACILITY+"\n"+ASSUMPTION_NOTICE+"\n실제 Pleos SDK 호출: 0 / 실제 허용 확인 지점: 0\n");
         b.append("단계: ").append(stage).append(" / 모의 경로 요청: ").append(requestCount).append("\n");
         if(selected!=null)b.append("계획: ").append(selected.id).append(" / 합성 차량 ").append(selected.drive).append("분 / 보행 ").append(selected.walk).append("m\n");
+        b.append("가정 허용 시연: ").append(options.simulatePermissions).append(" / 실제 허용 검증: false\n");
         b.append("계단 회피: ").append(options.stepFree).append(" / 보행 상한: ").append(options.maxWalk).append(" / 정차: ").append(motion).append("\n");
         for(Request r:requests)b.append('#').append(r.number).append(' ').append(r.api).append(" destination=").append(r.destination).append(" waypoint=").append(r.waypoint).append(" [mock]\n");
         for(String l:logs)b.append("· ").append(l).append('\n');return b.toString();

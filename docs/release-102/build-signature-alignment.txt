@@ -1,0 +1,20 @@
+Note: app/src/main/java/com/careroute/firstround/MainActivity.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): false
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=CareRoute Judge Demo, OU=Prototype, O=CareRoute, C=KR
+Signer #1 certificate SHA-256 digest: ea19b5307b14d60f2c496f525e2aee2b2ca50ef49c5def04a2d6e7cd2eda8d99
+Signer #1 certificate SHA-1 digest: 1c136359039eeee2ce98643ea3338e7e11c8f6c3
+Signer #1 certificate MD5 digest: 96fcb3f51336197da08266a839523158
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 3072
+Signer #1 public key SHA-256 digest: b868da22f034f2917ae6d6885f42f845455be69b56e068d4c4598c885103fd2d
+Signer #1 public key SHA-1 digest: 2045036dc535eb419c018002a7fd9ecbcd358736
+Signer #1 public key MD5 digest: b7b31a0bcc8ebb595c559d4d9db9cf83
+Created apk/CareRoute_CareRoute_release.apk

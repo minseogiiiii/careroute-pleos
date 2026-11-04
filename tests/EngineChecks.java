@@ -11,8 +11,8 @@ public final class EngineChecks {
     static void arrival(JourneyEngine e){e.arrive(e.currentRequest,e.arrivalDestination());}
     static JourneyEngine waiting(){JourneyEngine e=constrained();e.start();beginGuidance(e);arrival(e);arrival(e);return e;}
     public static void main(String[] args)throws Exception {
-        JourneyEngine e=new JourneyEngine();Plan p=e.displayPlan();check(p.id.equals("front/north/front")&&p.drive==16&&p.walk==180,"기본 16분/180m 정문 조합");
-        e=constrained();p=e.displayPlan();check(p.id.equals("side/south/east")&&p.drive==22&&p.walk==70,"계단회피+100m → 측면/남측/동측 22분/70m");
+        JourneyEngine e=new JourneyEngine();Plan p=e.displayPlan();check(p.id.equals("front/north/front")&&p.drive==16&&p.walk==180,"가정 A/CMI/A 기본 16분/180m");
+        e=constrained();p=e.displayPlan();check(p.id.equals("side/south/east")&&p.drive==22&&p.walk==70,"계단회피+100m → 가정 B/2주차장/U 22분/70m");
         check(rank(e.options).accepted.stream().noneMatch(v->v.drop.equals("taxi")||v.drop.equals("unknown")),"가까운 불허·미확인 후보 제외");
         e.options.maxWalk=0;check(e.displayPlan()==null,"충족 후보 없음");e.start();check(e.requestCount==0,"후보 없으면 요청 없음");
         e=constrained();e.options.evidenceValid=false;e.start();check(e.requestCount==0,"정보 만료 시 시작 차단");
@@ -37,6 +37,14 @@ public final class EngineChecks {
         check(SessionCodec.decode("garbage")==null&&SessionCodec.decode("")==null,"손상된 체크포인트 안전 초기화");
         JourneyEngine fresh=new JourneyEngine();check(rank(fresh.options).accepted.size()+rank(fresh.options).rejected.size()==20,"20개 조합 전수 평가");
         if(args.length>0){int parity=0;for(String line:Files.readAllLines(Path.of(args[0]))){String[] v=line.split("\t",-1);e=new JourneyEngine();e.options.stepFree=v[0].equals("1");e.options.maxWalk=v[1].equals("null")?null:Integer.valueOf(v[1]);e.options.walkFirst=v[2].equals("walk");e.options.evidenceValid=v[3].equals("1");if(!v[4].isEmpty())e.options.closed.addAll(Arrays.asList(v[4].split(",")));Ranking r=rank(e.options);String result=r.best()==null?"none":r.best().id+":"+r.best().walk+":"+r.best().drive; if(!result.equals(v[5])||r.accepted.size()!=Integer.parseInt(v[6]))throw new AssertionError("web/native parity "+line+" actual="+result);parity++;}check(parity==2048,"웹 기준 2,048개 조건 조합과 네이티브 추천 결과 일치");}
+        e=constrained();check(rank(e.options).accepted.stream().anyMatch(v->v.id.equals("side/north/east")),"운전자만 CMI에 주차하는 가정은 동승자 계단 조건으로 일괄 제외하지 않음");
+        check(Arrays.stream(DROPS).noneMatch(JourneyEngine::permissionVerified)&&Arrays.stream(PICKUPS).noneMatch(JourneyEngine::permissionVerified),"모든 승하차 지점의 실제 허용 검증은 false");
+        e=constrained();e.options.simulatePermissions=false;check(rank(e.options).accepted.isEmpty(),"가정 허용을 끄면 실제 미확인 지점 추천 0개");e.start();check(e.requestCount==0,"가정 허용 없이 안내 시작 차단");
+        e=waiting();e.options.simulatePermissions=false;e.pickup();check(e.stage==Stage.WAITING&&e.requestCount==1,"대기 중 가정 해제 시 미확인 픽업 요청 차단");
+        e=constrained();e.start();beginGuidance(e);arrival(e);e.options.simulatePermissions=false;e.restart();e.motion=Motion.STOPPED;e.resume();check(e.stage==Stage.RECOVERY&&e.requestCount==1,"가정 해제 후 남은 주차 재요청 차단");
+        e=constrained();e.options.simulatePermissions=false;e=SessionCodec.decode(SessionCodec.encode(e));check(e!=null&&!e.options.simulatePermissions&&rank(e.options).accepted.isEmpty(),"재시작 후 가정 허용 해제 보존");
+        e=constrained();byte[] legacy=Base64.getDecoder().decode(SessionCodec.encode(e));legacy[3]=1;check(SessionCodec.decode(Base64.getEncoder().encodeToString(legacy))==null,"기존 가상 시설 체크포인트를 새 배치로 오해해 복원하지 않음");
+        e=constrained();e.start();check(e.report().contains(ASSUMPTION_NOTICE)&&e.report().contains("실제 허용 확인 지점: 0"),"진단 기록에도 가정과 실제 허용 미확인 표시");
         System.out.println("ALL "+checks+" CHECKS PASSED");
     }
 }

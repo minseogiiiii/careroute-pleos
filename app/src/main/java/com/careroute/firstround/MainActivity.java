@@ -53,7 +53,7 @@ public final class MainActivity extends Activity {
         LinearLayout header=col();header.setPadding(dp(20),dp(16),dp(20),dp(12));header.setBackgroundColor(INK);
         add(header,"CareRoute",25,true,Color.WHITE);
         add(header,"가족은 입구에, 차는 주차장에. 다시 만날 곳까지.",13,false,Color.rgb(203,223,211));
-        add(header,"오프라인 모의 시연  ·  가상 시설·신호  ·  SDK 미연동",12,true,Color.rgb(200,231,169));root.addView(header);
+        add(header,"가정 배치 모의 시연 · 실제 승하차 허용 미확인 · SDK 미연동",12,true,Color.rgb(200,231,169));root.addView(header);
         HorizontalScrollView tabs=new HorizontalScrollView(this);tabs.setHorizontalScrollBarEnabled(false);LinearLayout row=new LinearLayout(this);row.setPadding(dp(12),dp(8),dp(12),dp(8));
         String[] labels={"방문 시연","추천 근거","시연 도구","검증 범위"};
         for(int i=0;i<labels.length;i++){final int index=i;TextView t=text(labels[i],14,true,tab==i?Color.WHITE:INK);t.setGravity(Gravity.CENTER);t.setPadding(dp(16),dp(12),dp(16),dp(12));t.setBackground(bg(tab==i?INK:BG,20));row.addView(t);t.setOnClickListener(v->{tab=index;render(false);});}tabs.addView(row);root.addView(tabs);
@@ -67,16 +67,17 @@ public final class MainActivity extends Activity {
         setContentView(root);if(keepScroll)scroll.post(()->scroll.scrollTo(0,oldY));
     }
     private void journey(){
-        add(page,"한빛병원 본관  /  "+stage(),14,true,MUTED);
+        add(page,FACILITY+"  /  "+stage(),14,true,MUTED);
         boolean wide=getResources().getConfiguration().screenWidthDp>=760;
         LinearLayout left=page,right=page;
         if(wide){LinearLayout r=new LinearLayout(this);r.setBaselineAligned(false);page.addView(r);left=col();right=col();LinearLayout.LayoutParams a=new LinearLayout.LayoutParams(0,-2,1.05f);a.rightMargin=dp(16);r.addView(left,a);r.addView(right,new LinearLayout.LayoutParams(0,-2,1));}
-        LinearLayout map=card(left);chip(map,"하차 D + 주차 P + 나중의 픽업 U");
+        LinearLayout map=card(left);chip(map,"승하차 가정 + 주차장 연결 가정 + 나중의 픽업");
+        add(map,ASSUMPTION_NOTICE,12,true,ORANGE);
         FacilityMapView diagram=new FacilityMapView(this,e);map.addView(diagram,new LinearLayout.LayoutParams(-1,dp(wide?245:210)));
         Plan p=e.displayPlan();
         if(p!=null){
             LinearLayout metrics=new LinearLayout(this);metrics.setPadding(0,dp(14),0,dp(6));
-            TextView walk=text("보행 합계\n"+p.walk+"m",20,true,INK),drive=text("차량 연결 합계\n"+p.drive+"분",20,true,INK);
+            TextView walk=text("동승자 보행 합계\n"+p.walk+"m",20,true,INK),drive=text("방문 차량 합계\n"+p.drive+"분",20,true,INK);
             metrics.addView(walk,new LinearLayout.LayoutParams(0,-2,1));metrics.addView(drive,new LinearLayout.LayoutParams(0,-2,1));map.addView(metrics);
             add(map,"계획용 합성 입력 · 운전자 보행·진료 대기·요금 제외",11,false,MUTED);
         }
@@ -94,7 +95,7 @@ public final class MainActivity extends Activity {
         check(c,"계단 없는 이동이 필요해요",e.options.stepFree,v->e.configure(v,e.options.maxWalk,e.options.walkFirst)).setEnabled(canTap());
         check(c,"동승자 보행 합계 100m 이하",e.options.maxWalk!=null,v->e.configure(e.options.stepFree,v?100:null,e.options.walkFirst)).setEnabled(canTap());
         check(c,"조건 충족 후 걷는 거리 우선",e.options.walkFirst,v->e.configure(e.options.stepFree,e.options.maxWalk,v)).setEnabled(canTap());
-        add(c,"100m는 시연 설정값입니다. 기본 순위는 조건 충족 후 차량 연결 시간 → 보행 거리입니다.",11,false,MUTED);
+        add(c,"100m는 시연 설정값입니다. 거리·시간·계단 여부도 가정값입니다. 조건 충족 후 차량 합계 → 보행 거리 순입니다.",11,false,MUTED);
         button(c,"대표 조건 적용 · 계단 회피 + 100m",false,canTap(),()->e.configure(true,100,false));
         Plan p=e.displayPlan();
         if(p==null){add(c,"현재 조건에 맞는 조합이 없어요.",20,true,ORANGE);add(c,"필수 정보·통제·보행 조건을 확인해 주세요. 미확인 후보를 대안으로 추천하지 않습니다.",13,false,MUTED);}
@@ -107,8 +108,8 @@ public final class MainActivity extends Activity {
         add(c,"하차  "+name(p.drop)+"\n주차  "+name(p.park)+"\n픽업  "+name(p.pickup),15,true,INK);
     }
     private String why(Plan p){
-        String a=p.stairs?"정문 연결에 계단이 있고 보행 부담이 큽니다.":"하차·픽업 보행 연결에 계단이 없습니다.";
-        if(e.options.stepFree&&p.drop.equals("side"))a+=" 정문은 계단 조건으로 제외하고, 측면 하차와 남측 주차를 함께 선택했습니다. 차량 시간은 정문 조합보다 늘어납니다.";
+        String a=p.stairs?"가정 A의 보행 경로를 계단 포함으로 설정했습니다.":"가정된 하차·픽업 보행 경로는 계단이 없습니다.";
+        if(e.options.stepFree&&p.drop.equals("side"))a+=" 가정 A는 계단 조건으로 제외하고 B 하차와 2주차장 연결 가정을 함께 선택했습니다. A 조합보다 차량 합계는 늘어납니다.";
         else a+=" 등록된 후보 중 현재 조건과 우선순위를 적용한 결과입니다.";
         return a;
     }
@@ -133,7 +134,7 @@ public final class MainActivity extends Activity {
             case WAITING:
                 chip(c,"04  주차 후 조용히 대기");add(c,"다시 만날 곳을 보관해요.",24,true,INK);
                 add(c,"주차  "+name(p.park)+"\n약속한 픽업  "+name(p.pickup),16,true,INK);
-                add(c,"건물 연결  "+(p.pickup.equals("east")?"본관 동측 출입구에서 계단 없는 35m 연결":"본관 정문에서 계단 포함 90m 연결"),14,false,MUTED);
+                add(c,"건물 연결  "+(p.pickup.equals("east")?"가정 U에서 계단 없는 35m 연결 가정":"가정 A에서 계단 포함 90m 연결 가정"),14,false,MUTED);
                 add(c,"연락은 기존 전화·메시지로 주고받습니다. 연락·대기만으로 안내를 시작하지 않습니다. 아래 선택 시 이용 조건을 다시 확인합니다.",14,false,MUTED);
                 if(e.contact)chip(c,"시연 입력: 가족 연락 수신 상황 · 요청 증가 없음");
                 if(!e.usable())add(c,"현재 보존한 픽업 계획은 이용할 수 없어요. 확인된 출입구로 변경하거나 시설 정보를 다시 확인해 주세요.",14,true,ORANGE);
@@ -179,13 +180,14 @@ public final class MainActivity extends Activity {
         for(Plan p:r.accepted){LinearLayout a=card(page);add(a,(picked!=null&&picked.id.equals(p.id)?"선택된 조합 · ":"조건 충족 조합 · ")+shortName(p.drop)+" 하차",16,true,INK);add(a,shortName(p.park)+" → "+shortName(p.pickup)+" 픽업",14,false,MUTED);add(a,"보행 "+p.walk+"m · 차량 "+p.drive+"분 · "+(p.stairs?"계단 포함":"계단 없음"),15,true,GREEN);add(a,"차량 구간(분): "+p.costs[0]+" + "+p.costs[1]+" + "+p.costs[2]+" + "+p.costs[3]+" = "+p.drive,12,false,MUTED);if(e.stage==Stage.PLAN)button(a,"이 조합 선택",false,canTap(),()->e.select(p.id));}
         Map<String,Integer> counts=new LinkedHashMap<>();for(Plan p:r.rejected)counts.put(p.reason,counts.getOrDefault(p.reason,0)+1);
         LinearLayout excluded=card(page);add(excluded,"제외 이유",18,true,INK);for(Map.Entry<String,Integer> en:counts.entrySet())add(excluded,en.getKey()+" · "+en.getValue()+"개",14,false,ORANGE);
-        add(excluded,"택시 전용 10m·허용 미확인 5m 후보도 더 가깝다는 이유로 추천하지 않습니다. 수치는 합성 입력이며 기존 내비 대비 실측 성과가 아닙니다.",12,false,MUTED);
+        add(excluded,"전용구역 가정 10m·허용 미확인 가정 5m 후보도 더 가깝다는 이유로 추천하지 않습니다. 수치는 합성 입력이며 기존 내비 대비 실측 성과가 아닙니다.",12,false,MUTED);
     }
     private void lab(){
         LinearLayout c=card(page);chip(c,"심사자용 · 모든 입력은 모의");add(c,"정상 흐름과 실패 흐름을 확인하세요.",22,true,INK);motionHint(c);
         button(c,"모의 정차 확인",false,true,()->e.motion=Motion.STOPPED);
         button(c,"모의 주행 중",false,true,()->{e.motion=Motion.MOVING;e.boarded=false;e.sensorPossible=false;});
         button(c,"모의 정차 미확인",false,true,()->{e.motion=Motion.UNKNOWN;e.boarded=false;e.sensorPossible=false;});
+        check(c,"가정한 허용 조건으로 시연 · 실제 허가 아님",e.options.simulatePermissions,v->{e.options.simulatePermissions=v;if(e.stage==Stage.PLAN)e.selected=null;e.log("가정 허용 시연 변경 · 실제 허용 검증 아님");});
         check(c,"모의 시설 정보가 유효함",e.options.evidenceValid,v->{e.options.evidenceValid=v;if(e.stage==Stage.PLAN)e.selected=null;e.log("시연자: 시설 정보 유효성 변경");});
         for(String id:new String[]{"front","side","west","north","south","east"})check(c,"통제 · "+name(id),e.options.closed.contains(id),v->{if(v)e.options.closed.add(id);else e.options.closed.remove(id);if(e.stage==Stage.PLAN)e.selected=null;e.log("시연자: 시설 통제 변경 · "+id);});
         check(c,"모의 승하차 센서 지원",e.sensorAvailable,v->{e.sensorAvailable=v;e.sensorPossible=false;});
@@ -206,7 +208,8 @@ public final class MainActivity extends Activity {
         add(c,"왜 차량용 앱인가",19,true,INK);add(c,"선정한 하차 지점을 경유지, 주차장을 목적지로 넘겨 운전자 재검색을 줄이고 나중의 픽업까지 이어 쓰는 설계입니다. 실제 차량 사용성은 별도 검증이 필요합니다.",14,false,MUTED);
         add(c,"지원 대상",19,true,INK);add(c,"입구까지 스스로 이동할 수 있지만 걷기가 부담스러운 동승자와, 별도로 주차·재픽업을 맡는 운전자입니다. 상시 동행이 필요한 사람의 단독 하차는 이 시연 대상에서 제외합니다.",14,false,MUTED);
         add(c,"개인정보·저장",19,true,INK);add(c,"인터넷·위치·전화·연락처·차량 권한을 요청하지 않습니다. 앱 내부에 합성 계획과 모의 기록만 저장합니다. 재실행 시 정차·안내 상태는 미확인으로 되돌리고 운전자 확인 뒤 재개합니다. 초기화 또는 앱 데이터 삭제로 지울 수 있습니다.",14,false,MUTED);
+        add(c,"시설 조사와 시연 가정",19,true,INK);add(c,"실제 확인: 본관 1주차장 공사, 복수 주차장, CMI 안내 경로의 계단. 미확인: 승용차 하차·픽업 허용 위치. A/B/C/U와 주차장 연결은 개발용 가정이며 실제 지도와 좌표를 사용하지 않습니다. 가정 허용을 끄면 추천을 보류합니다.",14,false,MUTED);
         add(c,"기술 연결 계획",19,true,INK);add(c,"첫 안내: requestRouteWithWaypoints(경유 D, 목적지 P). 픽업·귀가: requestRoute(U/귀가지). 요청·계산 완료·안내 시작·도착 이벤트를 구분합니다. 이 명칭을 사용한 모의 기록은 실제 SDK 성공 증거가 아닙니다.",13,false,MUTED);
-        add(c,"CareRoute 1.0.1-demo · Android 9 이상 · 한국어\n가상 한빛병원 · 계획용 합성 수치 · 오프라인 실행",12,true,GREEN);
+        add(c,"CareRoute 1.0.2-demo · Android 9 이상 · 한국어\n서울대병원 환경 참고 · 승하차·연결·수치 모두 가정 · 오프라인 실행",12,true,GREEN);
     }
 }

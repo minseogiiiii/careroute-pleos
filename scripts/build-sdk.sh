@@ -17,7 +17,7 @@ s=s.replace('<application ', '<application android:debuggable="false" ',1)
 Path('build/sdk-release/AndroidManifest.xml').write_text(s)
 PY
 "$tools/aapt2" compile --dir app/src/main/res -o "$out/resources.zip"
-"$tools/aapt2" link -I "$platform" --manifest "$out/AndroidManifest.xml" --java "$out/gen" --min-sdk-version 28 --target-sdk-version 35 --version-code 101 --version-name 1.0.1-demo -o "$out/resources.apk" "$out/resources.zip"
+"$tools/aapt2" link -I "$platform" --manifest "$out/AndroidManifest.xml" --java "$out/gen" --min-sdk-version 28 --target-sdk-version 35 --version-code 102 --version-name 1.0.2-demo -o "$out/resources.apk" "$out/resources.zip"
 find app/src/main/java "$out/gen" -name '*.java' > "$out/java-sources.txt"
 javac -encoding UTF-8 -source 17 -target 17 -classpath "$platform" -d "$out/classes" @"$out/java-sources.txt"
 find "$out/classes" -name '*.class' > "$out/class-sources.txt"

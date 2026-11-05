@@ -9,6 +9,7 @@
 - [가정 배치와 실제 조사 근거](docs/ASSUMED_CAMPUS_KO.md)
 - [실행 순서](JUDGE_START_KO.md)
 - [이번 버전 검증 기록](docs/release-102/README.md)
+- [제출 자료 전체 대조](docs/release-102/submission-audit.md)
 - [이전 1.0.1 영상](demo/CareRoute_FirstRound_Demo_90s_20261029.mp4): 가상 한빛병원 화면 캡처 편집본. 이번 배치의 영상이 아닙니다.
 - [이전 1.0.1 APK](apk/archive/1.0.1/CareRoute_CareRoute_release.apk)
 

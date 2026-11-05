@@ -1,0 +1,218 @@
+{
+  "audit_date": "2026-11-04",
+  "timezone": "America/New_York",
+  "base_commit": "343742187d53ba62958acfd88772ed8e43e4f6ae",
+  "proposal_sha256": "3945112dece3524ee215407fc00c03463ac91d1467d9724b7913652f9a179c25",
+  "proposal_pages": 9,
+  "official_tables_preserved": true,
+  "apk_sha256": "369fa1b5d26ce857157d5d4eed703bf5d5e58d11dacfd761dc02895fba025538",
+  "video_sha256": "4f59346fc54473a8f1254c3f457c61a8f7abdc006d69256be9382b026415ff98",
+  "video_seconds": 90,
+  "video_frames": 2160,
+  "video_full_decode": "passed",
+  "video_scenes_reviewed": 10,
+  "semantic_plan_totals": [
+    {
+      "drop": "front",
+      "park": "north",
+      "pickup": "front",
+      "walk": 180,
+      "vehicle_total": 16
+    },
+    {
+      "drop": "side",
+      "park": "south",
+      "pickup": "east",
+      "walk": 70,
+      "vehicle_total": 22
+    },
+    {
+      "drop": "west",
+      "park": "north",
+      "pickup": "east",
+      "walk": 90,
+      "vehicle_total": 26
+    }
+  ],
+  "relative_markdown_links": [
+    {
+      "source": "JUDGE_START_KO.md",
+      "target": "demo/CareRoute_FirstRound_Demo_90s_1.0.2.mp4",
+      "resolved": "demo/CareRoute_FirstRound_Demo_90s_1.0.2.mp4"
+    },
+    {
+      "source": "JUDGE_START_KO.md",
+      "target": "demo/README.md",
+      "resolved": "demo/README.md"
+    },
+    {
+      "source": "README.md",
+      "target": "apk/CareRoute_CareRoute_release.apk",
+      "resolved": "apk/CareRoute_CareRoute_release.apk"
+    },
+    {
+      "source": "README.md",
+      "target": "demo/CareRoute_FirstRound_Demo_90s_1.0.2.mp4",
+      "resolved": "demo/CareRoute_FirstRound_Demo_90s_1.0.2.mp4"
+    },
+    {
+      "source": "README.md",
+      "target": "demo/README.md",
+      "resolved": "demo/README.md"
+    },
+    {
+      "source": "README.md",
+      "target": "docs/ASSUMED_CAMPUS_KO.md",
+      "resolved": "docs/ASSUMED_CAMPUS_KO.md"
+    },
+    {
+      "source": "README.md",
+      "target": "JUDGE_START_KO.md",
+      "resolved": "JUDGE_START_KO.md"
+    },
+    {
+      "source": "README.md",
+      "target": "docs/release-102/README.md",
+      "resolved": "docs/release-102/README.md"
+    },
+    {
+      "source": "README.md",
+      "target": "docs/release-102/submission-audit.md",
+      "resolved": "docs/release-102/submission-audit.md"
+    },
+    {
+      "source": "README.md",
+      "target": "demo/CareRoute_FirstRound_Demo_90s_20261029.mp4",
+      "resolved": "demo/CareRoute_FirstRound_Demo_90s_20261029.mp4"
+    },
+    {
+      "source": "README.md",
+      "target": "apk/archive/1.0.1/CareRoute_CareRoute_release.apk",
+      "resolved": "apk/archive/1.0.1/CareRoute_CareRoute_release.apk"
+    },
+    {
+      "source": "README.md",
+      "target": "docs/release-102/captures/02-conditions-top-device.png",
+      "resolved": "docs/release-102/captures/02-conditions-top-device.png"
+    },
+    {
+      "source": "demo/README.md",
+      "target": "CareRoute_FirstRound_Demo_90s_1.0.2.mp4",
+      "resolved": "demo/CareRoute_FirstRound_Demo_90s_1.0.2.mp4"
+    },
+    {
+      "source": "demo/README.md",
+      "target": "1.0.2/CareRoute_FirstRound_Demo_90s_1.0.2.srt",
+      "resolved": "demo/1.0.2/CareRoute_FirstRound_Demo_90s_1.0.2.srt"
+    },
+    {
+      "source": "demo/README.md",
+      "target": "1.0.2/video-verification.json",
+      "resolved": "demo/1.0.2/video-verification.json"
+    },
+    {
+      "source": "demo/README.md",
+      "target": "../docs/release-102/README.md",
+      "resolved": "docs/release-102/README.md"
+    },
+    {
+      "source": "demo/README.md",
+      "target": "CareRoute_FirstRound_Demo_90s_20261029.mp4",
+      "resolved": "demo/CareRoute_FirstRound_Demo_90s_20261029.mp4"
+    },
+    {
+      "source": "docs/VERIFICATION_KO.md",
+      "target": "release-102/README.md",
+      "resolved": "docs/release-102/README.md"
+    },
+    {
+      "source": "docs/VERIFICATION_KO.md",
+      "target": "../demo/README.md",
+      "resolved": "demo/README.md"
+    },
+    {
+      "source": "docs/VERIFICATION_KO.md",
+      "target": "../JUDGE_START_KO.md",
+      "resolved": "JUDGE_START_KO.md"
+    },
+    {
+      "source": "docs/VERIFICATION_KO.md",
+      "target": "ASSUMED_CAMPUS_KO.md",
+      "resolved": "docs/ASSUMED_CAMPUS_KO.md"
+    },
+    {
+      "source": "docs/VERIFICATION_KO.md",
+      "target": "release-102/submission-audit.md",
+      "resolved": "docs/release-102/submission-audit.md"
+    },
+    {
+      "source": "docs/HANDOFF_KO.md",
+      "target": "release-102/README.md",
+      "resolved": "docs/release-102/README.md"
+    },
+    {
+      "source": "docs/HANDOFF_KO.md",
+      "target": "../demo/README.md",
+      "resolved": "demo/README.md"
+    },
+    {
+      "source": "docs/HANDOFF_KO.md",
+      "target": "../JUDGE_START_KO.md",
+      "resolved": "JUDGE_START_KO.md"
+    },
+    {
+      "source": "docs/HANDOFF_KO.md",
+      "target": "ASSUMED_CAMPUS_KO.md",
+      "resolved": "docs/ASSUMED_CAMPUS_KO.md"
+    },
+    {
+      "source": "docs/HANDOFF_KO.md",
+      "target": "release-102/submission-audit.md",
+      "resolved": "docs/release-102/submission-audit.md"
+    },
+    {
+      "source": "docs/ASSUMED_CAMPUS_KO.md",
+      "target": "../demo/CareRoute_FirstRound_Demo_90s_1.0.2.mp4",
+      "resolved": "demo/CareRoute_FirstRound_Demo_90s_1.0.2.mp4"
+    },
+    {
+      "source": "docs/release-102/README.md",
+      "target": "../../demo/CareRoute_FirstRound_Demo_90s_1.0.2.mp4",
+      "resolved": "demo/CareRoute_FirstRound_Demo_90s_1.0.2.mp4"
+    },
+    {
+      "source": "docs/release-102/README.md",
+      "target": "../../demo/README.md",
+      "resolved": "demo/README.md"
+    },
+    {
+      "source": "docs/release-102/README.md",
+      "target": "../../demo/1.0.2/video-verification.json",
+      "resolved": "demo/1.0.2/video-verification.json"
+    },
+    {
+      "source": "docs/release-102/README.md",
+      "target": "submission-audit.md",
+      "resolved": "docs/release-102/submission-audit.md"
+    }
+  ],
+  "existing_test_logs": {
+    "core": 45,
+    "parity_inputs": 2048,
+    "ui": 100,
+    "restore": 9,
+    "rerun_in_this_audit": false
+  },
+  "actual_sdk_calls": 0,
+  "verified_real_stop_permissions": 0,
+  "application_sent": false,
+  "submission_ready": false,
+  "remaining": [
+    "participant fields",
+    "individual consents/signatures/dates",
+    "actual applicant APK filename",
+    "public GitHub identity review",
+    "final attachment/link choice and email submission"
+  ],
+  "scope": "Current proposal/video/APK/repository guidance/ZIP consistency audit. Not field validation, customer study, SDK integration proof, new Android UI run, or guarantee of selection."
+}

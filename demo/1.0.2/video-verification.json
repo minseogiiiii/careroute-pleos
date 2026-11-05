@@ -23,7 +23,7 @@
       "capture_sha256": "c2daef6a978c350177347ae0abec214d8c25628f81dec553020c167cea58108c",
       "heading": "기본 계획 · A 하차 + CMI 연결 + A 픽업",
       "title": "기본 가정은\n180m · 16분",
-      "caption": "동승자 보행 합계 180m\n방문 차량 합계 16분\n\nA의 보행 경로에는 계단이 있어\n계단 회피 조건이면 제외됩니다."
+      "caption": "보행: 하차→입구 + 출구→픽업\n차량: 출발→하차→주차→픽업→귀가\n\n모두 계획용 합성값입니다.\n실시간 예상시간은 아닙니다.\nA 보행 경로에는 계단이 있습니다."
     },
     {
       "scene": 3,
@@ -33,7 +33,7 @@
       "capture_sha256": "4f1c1a666c5875e4bede930a3a22ca0c73a836ad94383faddbfde5618bf357ca",
       "heading": "조건 변경 · 계단 회피 + 동승자 보행 합계 100m 이하",
       "title": "B 하차 + 2주차장\n+ U 픽업",
-      "caption": "보행 35m + 35m = 70m\n차량 합계는 22분으로 늘어납니다.\n\n하차·주차를 함께 고르고\n나중 픽업 장소도 보관합니다.\n수치는 시연용 합성값입니다."
+      "caption": "보행 35m + 35m = 70m\n차량 합계는 22분으로 늘어납니다.\n\n조건에 맞는 하차·주차를 함께 고르고\n나중 픽업 장소도 보관합니다.\n차량 합계에는 픽업·귀가도 포함."
     },
     {
       "scene": 4,
@@ -108,8 +108,10 @@
   ],
   "duration_seconds": 90,
   "frames": 2160,
-  "sha256": "f4d5409b6ba9258e7d8cffa44094ea686a4bb905586299169fafce6ef8dd9cc8",
-  "size_bytes": 1137216,
+  "sha256": "4f59346fc54473a8f1254c3f457c61a8f7abdc006d69256be9382b026415ff98",
+  "size_bytes": 1141630,
   "full_decode": "passed",
-  "repository_path": "demo/CareRoute_FirstRound_Demo_90s_1.0.2.mp4"
+  "repository_path": "demo/CareRoute_FirstRound_Demo_90s_1.0.2.mp4",
+  "edition": "1.0.2 submission audit revision",
+  "apk_sha256": "369fa1b5d26ce857157d5d4eed703bf5d5e58d11dacfd761dc02895fba025538"
 }

@@ -5,6 +5,7 @@
 **이번 배치는 서울대병원 환경을 참고한 개발용 가정입니다. 승하차 위치·허용·거리·차량 시간·주차장 연결은 미검증이며 실제 도로 안내가 아닙니다. 실제 Pleos SDK 호출은 0회입니다.**
 
 - [현재 release APK](apk/CareRoute_CareRoute_release.apk): 1.0.2-demo / versionCode 102 / Android 9 이상.
+- [현재 90초 시연 영상](demo/CareRoute_FirstRound_Demo_90s_1.0.2.mp4): APK 1.0.2 실행 화면 캡처 편집본. [영상 구성·범위](demo/README.md).
 - [가정 배치와 실제 조사 근거](docs/ASSUMED_CAMPUS_KO.md)
 - [실행 순서](JUDGE_START_KO.md)
 - [이번 버전 검증 기록](docs/release-102/README.md)
@@ -31,4 +32,4 @@ JDK17 / Gradle8.10.2 / AGP8.8.2 / Android SDK35 / Build Tools35.0.0. 핵심 검�
 
 release 재빌드에는 저장소 밖의 개인 서명키와 환경 변수가 필요합니다. 키·암호는 포함하지 않습니다. APK 해시는 `apk/SHA256SUMS.txt`에 있습니다. 새 버전의 검증 결과와 제한은 `docs/release-102/README.md`를 확인하십시오.
 
-현재 기획서·영상의 최종 제출 정합성 점검은 별도 작업입니다. 기존 1.0.1 검증 기록을 이번 버전 검증으로 전용하지 않습니다.
+기획서 안내와 현재 영상은 APK 1.0.2의 가정 배치·조합·모의 흐름에 맞췄습니다. 영상은 연속 조작 녹화가 아니라 검증된 APK 실행 캡처 10개 장면에 설명을 붙인 편집본입니다. 신청정보·동의·서명과 실제 접수는 별도로 마쳐야 합니다. 기존 1.0.1 검증 기록은 역사 자료입니다.
